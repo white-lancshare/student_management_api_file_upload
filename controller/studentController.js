@@ -7,6 +7,14 @@ try{
  const {firstName,lastName,email, phoneNumber}=req.body
  console.log( 'data ',phoneNumber,firstName,lastName,email)
 
+ const emailFinder=await student.findOne({where:{id}})
+
+ if(!emailFinder){
+  return  res.status(400).json({
+        message:"user with this email already exist"
+    })
+ }
+
  const profileImage=req.file.path
 
 const created= await student.create({
